@@ -10,21 +10,31 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class asciiART {
-    final static char AsciiArr[] = " `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@".toCharArray(); //len - 92
-    final static char CompactAsciiArr[] = " `.-':_,^=;><+!rc*/zsT)7(Ff1[Zj2w6dpbUXHRDBgNW&@".toCharArray(); //len-48
+    final char LEGACY_STR[] = " `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@".toCharArray(); //len - 92
+    final public static char ExtAsciiArr[] = " .-:_,^=;><+!rctunoxjywqk6h4OGb8#$BQ%&@".toCharArray(); //len - 39
+    final public static char AsciiArr[] = " .:`,'^=-;<+r*?}fUA#%@".toCharArray(); //len-22
+    final public static char CompactAsciiArr[] = " .:=-+*#%@".toCharArray(); //len-10
+    static char ChosenStr[];
+    static int strLen = 22;
     private int Width = 0;
     private int Height = 0;
     
     BufferedImage buffImg;
-    public asciiART(){}
+    public asciiART(){
+        this.ChosenStr = this.AsciiArr;
+    }
     public asciiART(File imgFile) throws IOException {
         this.buffImg = ImageIO.read(imgFile);
         this.Width = buffImg.getWidth();
         this.Height = buffImg.getHeight();
+        this.ChosenStr = this.AsciiArr;
         String[] strArr = GenerateAscii("Luminosity");
         for(String str : strArr){
             System.out.println(str);
         }
+    }
+    public void setAsciiStr(char strArr[]){
+        this.ChosenStr = strArr;
     }
     public String[] GenerateAscii(String Method){
         String[] strArr = new String[this.Height];
@@ -51,13 +61,14 @@ public class asciiART {
                         break;
                 }
                 float PrcntGrayScale = (Gray/255)*100;
-                float PrcntCharArr = (PrcntGrayScale/100)*48; //ext-92 cmpct-48
+                float PrcntCharArr = (PrcntGrayScale/100)*strLen;
                 int charIndex = (int) PrcntCharArr;
-                if(charIndex==48){ //ext-92 cmpct-48
-                    charIndex = 47;
+                if(charIndex==strLen){
+                    charIndex = strLen-1;
                 }
-                colStr[x] = CompactAsciiArr[charIndex]; //ext-AsciiArr cmpct-CompactAsciiArr
+                colStr[x] = this.ChosenStr[charIndex];
             }
+            
             strArr[y] = String.copyValueOf(colStr);
         }
         return strArr;

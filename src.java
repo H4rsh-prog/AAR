@@ -127,6 +127,7 @@ public class src {
                     }
                     break;
             }
+            aA.setAsciiStr(aA.ExtAsciiArr);
             String[] AsciiArr = aA.GenerateAscii(Method);
             for(String s : AsciiArr){
                 System.out.println(s);
