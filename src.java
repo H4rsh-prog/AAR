@@ -12,17 +12,19 @@ public class src {
             asciiART aA = new asciiART();
             // aA.ChangeImg(new File("C:\\Users\\User\\Pictures\\eerie_lake_ii_by_corrupterartai_diewrbi-pre.jpg"));
             aA.ChangeImg(new File(showInputDialog("Enter File_PATH")));
-            // aA.ChangeAspect(895, 200);
-            aA.ChangeAspect(Integer.parseInt(showInputDialog("Enter buffer Width")), Integer.parseInt(showInputDialog("Enter buffer Height")));
+            // aA.ChangeAspect(895, 200);   //vsc text export
+            aA.ChangeAspect(945, 184);   //notepad text export
+            // aA.ChangeAspect(Integer.parseInt(showInputDialog("Enter buffer Width")), Integer.parseInt(showInputDialog("Enter buffer Height")));
             // aA.ChangeAspect(1888, 485);
-            // aA.setAsciiStr(" .'^\",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqdpbkhhao*#MW&8%B@$");
-            aA.setAsciiStr(" .,:;+*?%S#@");
+            // aA.setAsciiStr("  .'`^\",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqdpbkhhao*#MW&8%B@$");
+            // aA.setAsciiStr(" .:`,'^=-;<+r*?}fUA#%@");
+            // aA.setAsciiStr("  .':-=+*?%W#@$");
             String arr[] = aA.GenerateAscii("Luminosity");
             FileWriter fw = new FileWriter("./output.txt");
             for (String string : arr) {
                 Thread.sleep(10);
-                // fw.write("\n"+string);
-                System.out.println(string);
+                fw.write("\n"+string);
+                // System.out.println(string);
             }
         } catch (Exception ex) {
             ex.printStackTrace();

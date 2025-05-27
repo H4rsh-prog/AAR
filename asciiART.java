@@ -14,9 +14,9 @@ public class asciiART {
     final public static char ExtAsciiArr[] = " .-:_,^=;><+!rctunoxjywqk6h4OGb8ll#$BQ%&@".toCharArray(); //len - 39  //second iteration extended
     final public static char AsciiArr[] = " .:`,'^=-;<+r*?}fUA#%@".toCharArray(); //len-22  //second iteration
     final public static char CompactAsciiArr[] = " .:=-+*#%@".toCharArray(); //len-10   //second iteration shortened
-    final public static char perfectedAsciiArr[] = " .,:;+*?%S#@".toCharArray(); //third iteration (final hopefully)
+    final public static char perfectedAsciiArr[] = " .,:;+*?%S#@".toCharArray(); //third iteration (final hopefully)                <--------CURRENT VERSION
     private char ChosenStr[] = this.perfectedAsciiArr;
-    private int strLen = 22;
+    private int strLen = ChosenStr.length;
     private int Width = 0;
     private int Height = 0;
     
