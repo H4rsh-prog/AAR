@@ -10,31 +10,44 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class asciiART {
-    final char LEGACY_STR[] = " `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@".toCharArray(); //len - 92
-    final public static char ExtAsciiArr[] = " .-:_,^=;><+!rctunoxjywqk6h4OGb8#$BQ%&@".toCharArray(); //len - 39
-    final public static char AsciiArr[] = " .:`,'^=-;<+r*?}fUA#%@".toCharArray(); //len-22
-    final public static char CompactAsciiArr[] = " .:=-+*#%@".toCharArray(); //len-10
-    static char ChosenStr[];
-    static int strLen = 22;
+    final char LEGACY_STR[] = " `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@".toCharArray(); //len - 92  //first iteration
+    final public static char ExtAsciiArr[] = " .-:_,^=;><+!rctunoxjywqk6h4OGb8ll#$BQ%&@".toCharArray(); //len - 39  //second iteration extended
+    final public static char AsciiArr[] = " .:`,'^=-;<+r*?}fUA#%@".toCharArray(); //len-22  //second iteration
+    final public static char CompactAsciiArr[] = " .:=-+*#%@".toCharArray(); //len-10   //second iteration shortened
+    final public static char perfectedAsciiArr[] = " .,:;+*?%S#@".toCharArray(); //third iteration (final hopefully)
+    private char ChosenStr[] = this.perfectedAsciiArr;
+    private int strLen = 22;
     private int Width = 0;
     private int Height = 0;
     
     BufferedImage buffImg;
-    public asciiART(){
-        this.ChosenStr = this.AsciiArr;
-    }
+    public asciiART(){}
     public asciiART(File imgFile) throws IOException {
         this.buffImg = ImageIO.read(imgFile);
         this.Width = buffImg.getWidth();
         this.Height = buffImg.getHeight();
-        this.ChosenStr = this.AsciiArr;
         String[] strArr = GenerateAscii("Luminosity");
         for(String str : strArr){
             System.out.println(str);
         }
     }
-    public void setAsciiStr(char strArr[]){
-        this.ChosenStr = strArr;
+    public asciiART(File imgFile, int x, int y) throws IOException {
+        this.buffImg = ImageIO.read(imgFile);
+        this.Width = buffImg.getWidth();
+        this.Height = buffImg.getHeight();
+        this.ChangeAspect(x, y);
+        String[] strArr = GenerateAscii("Luminosity");
+        for(String str : strArr){
+            System.out.println(str);
+        }
+    }
+    public void setAsciiStr(String str){
+        this.ChosenStr = str.toCharArray();
+        this.strLen = this.ChosenStr.length;
+    }
+    public void setAsciiStr(char charArr[]){
+        this.ChosenStr = charArr;
+        this.strLen = this.ChosenStr.length;
     }
     public String[] GenerateAscii(String Method){
         String[] strArr = new String[this.Height];
@@ -68,7 +81,6 @@ public class asciiART {
                 }
                 colStr[x] = this.ChosenStr[charIndex];
             }
-            
             strArr[y] = String.copyValueOf(colStr);
         }
         return strArr;
