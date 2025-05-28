@@ -85,6 +85,28 @@ public class asciiART {
         }
         return strArr;
     }
+    public String[] GenerateAscii(){
+        String[] strArr = new String[this.Height];
+        char[] colStr = new char[this.Width];
+        for (int y=0;y<this.Height;y++) {
+            for(int x=0;x<this.Width;x++){
+                Color ImgRGB = new Color(buffImg.getRGB(x, y));
+                int RedVal = ImgRGB.getRed();
+                int GreenVal = ImgRGB.getGreen();
+                int BlueVal = ImgRGB.getBlue();
+                float Gray = (int)((RedVal*0.21)+(GreenVal*0.72)+(BlueVal*0.07));
+                float PrcntGrayScale = (Gray/255)*100;
+                float PrcntCharArr = (PrcntGrayScale/100)*strLen;
+                int charIndex = (int) PrcntCharArr;
+                if(charIndex==strLen){
+                    charIndex = strLen-1;
+                }
+                colStr[x] = this.ChosenStr[charIndex];
+            }
+            strArr[y] = String.copyValueOf(colStr);
+        }
+        return strArr;
+    }
     public void ChangeImg(File imgFile) throws IOException{
         this.buffImg = ImageIO.read(imgFile);
         this.Width = buffImg.getWidth();

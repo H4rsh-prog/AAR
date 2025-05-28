@@ -19,7 +19,7 @@ public class src {
             // aA.setAsciiStr("  .'`^\",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqdpbkhhao*#MW&8%B@$");
             // aA.setAsciiStr(" .:`,'^=-;<+r*?}fUA#%@");
             // aA.setAsciiStr("  .':-=+*?%W#@$");
-            String arr[] = aA.GenerateAscii("Luminosity");
+            String arr[] = aA.GenerateAscii();
             FileWriter fw = new FileWriter("./output.txt");
             for (String string : arr) {
                 Thread.sleep(10);

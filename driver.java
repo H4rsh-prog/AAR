@@ -16,7 +16,6 @@ class Resolution{
 public class driver {
     public static void main(String[] args) {
         try {
-            // new asciiART(new File("asset/cyberpunksquat.png"));
             boolean flag1,flag2;
             asciiART aA = new asciiART();
             do { 
